@@ -25,12 +25,6 @@ update(program) {
 		FileReadLine, Latest, VersionCheck.txt,1
 		IniRead,Current,%program%.ini,Preferences,Version
 		;MsgBox,Latest: %Latest% `n Current: %Current%
-		if (Latest > Current)
-		{
-			MsgBox,4,A new version of %program% is available!,Would you like to visit the %program% homepage and download the latest version?
-			IfMsgBox,Yes
-				Goto,Homepage
-		}
 		FileDelete,VersionCheck.txt ;; delete version check
 	}
 }
