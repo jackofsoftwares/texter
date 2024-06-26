@@ -12,7 +12,7 @@ InstallAutocorrect:
 	Gui,10: Add,Text,x10 y110 Center,Texter is initializing. This will only happen once.
 	Gui,10: Color,F8FAF0
 	Gui 2:+Disabled
-	Gui,10: Show,auto,About Texter
+	Gui,10: Show,w310 h220,About Texter
 	BundleDir = Active\Autocorrect\
 	AutoCorrectBundle = resources\autocorrect.txt
 	LineSwitch := 0

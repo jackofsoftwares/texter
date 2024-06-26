@@ -445,6 +445,21 @@ expanded += 1
 chars_saved += ClipLength
 IniWrite,%expanded%,texter.ini,Stats,Expanded
 IniWrite,%chars_saved%,texter.ini,Stats,Characters
+
+If InStr(allBundles, PossibleMatch)
+{
+	StringSplit, bundleArray, allBundles, `,
+	Loop, %bundleArray0%
+	{
+		curBun := bundleArray%A_Index%
+		IniWrite,0,texter.ini,Bundles,%curBun%
+	}
+	IniWrite,1,texter.ini,Bundles,%PossibleMatch%
+	IniWrite,1,texter.ini,Bundles,Default
+	Gosub,BuildActive
+	;SoundPlay, %A_ScriptDir%\resources\activateGroup.wav
+}
+
 Return
 
 HOTKEYS: 
