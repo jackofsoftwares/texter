@@ -27,9 +27,6 @@ update(program) {
 		;MsgBox,Latest: %Latest% `n Current: %Current%
 		if (Latest > Current)
 		{
-			MsgBox,4,A new version of %program% is available!,Would you like to visit the %program% homepage and download the latest version?
-			IfMsgBox,Yes
-				Goto,Homepage
 		}
 		FileDelete,VersionCheck.txt ;; delete version check
 	}
