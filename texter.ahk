@@ -457,7 +457,8 @@ If InStr(allBundles, PossibleMatch)
 	IniWrite,1,texter.ini,Bundles,%PossibleMatch%
 	IniWrite,1,texter.ini,Bundles,Default
 	Gosub,BuildActive
-	;SoundPlay, %A_ScriptDir%\resources\activateGroup.wav
+	if (GrSound = 1)
+		SoundPlay, %A_ScriptDir%\resources\activateGroup.wav
 }
 
 Return
@@ -502,6 +503,8 @@ EnterBox := GetValFromIni("Triggers","Enter",0)
 TabBox := GetValFromIni("Triggers","Tab",0)
 SpaceBox := GetValFromIni("Triggers","Space",0)
 ExSound := GetValFromIni("Preferences","ExSound",1)
+GrSound := GetValFromIni("Preferences","GrSound",1)
+
 Synergy := GetValFromIni("Preferences","Synergy",0)
 Autocorrect := GetValFromIni("Preferences","AutoCorrect",1)
 Default := GetValFromIni("Bundles","Default",1)

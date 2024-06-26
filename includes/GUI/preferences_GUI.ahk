@@ -1,7 +1,7 @@
 PREFERENCES:
 Gui,3: Destroy
 Gui,3: +owner
-Gui,3: Add, Tab,x5 y5 w315 h280 vTabs,General|Print|Stats ;|Import|Export Add these later
+Gui,3: Add, Tab,x5 y5 w315 h320 vTabs,General|Print|Stats ;|Import|Export Add these later
 IniRead,otfhotkey,texter.ini,Hotkey,OntheFly
 Gui,3: Add,Text,x10 y40,On-the-Fly shortcut:
 Gui,3: Add,Hotkey,xp+10 yp+20 w100 vsotfhotkey, %otfhotkey%
@@ -19,15 +19,21 @@ IniRead,OnStartup,texter.ini,Settings,Startup
 Gui,3: Add,Checkbox, vStartup x20 yp+30 Checked%OnStartup%,Run Texter at start up
 IniRead,Update,texter.ini,Preferences,UpdateCheck
 Gui,3: Add,Checkbox, vUpdate x20 yp+20 Checked%Update%,Check for updates at launch?
+
 IniRead,AutoCorrect,texter.ini,Preferences,AutoCorrect
 Gui,3: Add,Checkbox, vAutoCorrect x20 yp+20 gToggle Checked%AutoCorrect%,Enable Universal Spelling AutoCorrect?
+
 IniRead,ExSound,texter.ini,Preferences,ExSound
 Gui,3: Add,Checkbox, vExSound x20 yp+20 gToggle Checked%ExSound%,Play sound when replacement triggered?
+
+IniRead,GrSound,texter.ini,Preferences,GrSound
+Gui,3: Add,Checkbox, vGrSound x20 yp+20 gToggle Checked%GrSound%,Play sound when bundle activated?
+
 IniRead,Synergy,texter.ini,Preferences,Synergy
 Gui,3: Add,Checkbox, vSynergy x20 yp+20 gToggle Checked%Synergy%,Make Texter compatible across computers with Synergy?
 ;Gui,3: Add,Button,x150 y200 w75 GSETTINGSOK Default,&OK
-Gui,3: Add,Button,x165 y296 w75 GSETTINGSOK Default,&OK
-Gui,3: Add,Button,xP+80 yp w75 GSETTINGSCANCEL,&Cancel
+Gui,3: Add,Button,x165 y320 w75 GSETTINGSOK Default,&OK
+Gui,3: Add,Button,xP+70 yp w75 GSETTINGSCANCEL,&Cancel
 Gui,3: Tab,2
 Gui,3: Add,Button,w150 h150 gPrintableList,Create Printable Texter Cheatsheet
 Gui,3: Add,Text,xp+160 y50 w125 Wrap,Click the big button to export a printable cheatsheet of all your Texter hotstrings, replacements, and triggers.
