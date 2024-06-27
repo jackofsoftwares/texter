@@ -4,16 +4,16 @@
 ;		http://www.donationcoder.com/Software/Skrommel/index.html#AutoClip
 ; Huge thanks to Dustin Luck for his contributions
 ; Script Function:
-;	Designed to implement simple, on-the-fly creation and managment 
+;	Designed to implement simple, on-the-fly creation and managment
 ;	of auto-replacing hotstrings for repetitive text
 ;	http://lifehacker.com/software//lifehacker-code-texter-windows-238306.php
 SetWorkingDir %A_ScriptDir%
-#SingleInstance,Force 
+#SingleInstance,Force
 #NoEnv
 StringCaseSense On
 AutoTrim,off
 SetKeyDelay,-1
-SetWinDelay,0 
+SetWinDelay,0
 ;Gosub,UpdateCheck
 Gosub,ASSIGNVARS
 Gosub,RESOURCES
@@ -61,9 +61,9 @@ Loop
 	    }
 	    else
 	    {
-	      PossibleMatch=%PossibleMatch%%UserInput% 
+	      PossibleMatch=%PossibleMatch%%UserInput%
 	    }
-		;Tooltip, PossibleMatch= %PossibleMatch%    
+		;Tooltip, PossibleMatch= %PossibleMatch%
 	    IfInString, HotStrings, |%PossibleMatch%|
 	    { ;found a match - go to trigger search
 	      break
@@ -85,9 +85,9 @@ Loop
   }
   if (Autocorrect = 1 and AutoMatch = 1)
   {
-		;msgbox %autocorrectkeys% 
+		;msgbox %autocorrectkeys%
 	  ;if PossHexMatch in %AutocorrectKeys%
-	  ;{ ;matched in triggerless list	
+	  ;{ ;matched in triggerless list
 		ReadFrom = %A_ScriptDir%\Active\Autocorrect\replacements
 	    Match := Hexify(PossibleMatch)
 		;msgbox %match%
@@ -140,7 +140,7 @@ Loop
       WinState := LWinState || RWinState
 	  Modifier=
       if (AltState || CtrlState || WinState || ShiftState)
-      {	
+      {
 		if AltState
 		{
 		  Modifier = !
@@ -172,7 +172,7 @@ Loop
 	  }
 	  Bank = %Trigger%Keys
 	  Bank := %Bank%
-	  PossHexMatch := Hexify(PossibleMatch)	
+	  PossHexMatch := Hexify(PossibleMatch)
       if PossHexMatch in %Bank%
       { ;hotstring/trigger match
 		ReadFrom = %A_ScriptDir%\Active\replacements
@@ -276,9 +276,9 @@ Loop
 	    SendRaw, %UserInput%  ; SendRaw ensures special characters like #, !, {}, etc. are interpreted and sent correctly
 		Starting=
 		Modifier=
-	  
+
 	}
- 
+
 }
 return
 
@@ -287,7 +287,7 @@ return
 
 EXECUTE:
 WinGetActiveTitle,thisWindow ; this variable ensures that the active Window is receiving the text, activated before send
-;; below added b/c SendMode Play appears not to be supported in Vista 
+;; below added b/c SendMode Play appears not to be supported in Vista
 ;EnableTriggers(false)
 if (A_OSVersion = "WIN_VISTA") or (Synergy = 1)
 	SendMode Input
@@ -376,7 +376,7 @@ else
 		if escapePrompt = 1
 		{
 			return
-		}		
+		}
 	}
 	IfInString,ReplacementText,`%|
 	{
@@ -445,8 +445,8 @@ expanded += 1
 chars_saved += ClipLength
 IniWrite,%expanded%,texter.ini,Stats,Expanded
 IniWrite,%chars_saved%,texter.ini,Stats,Characters
-
-If InStr(allBundles, PossibleMatch)
+needle = |%PossibleMatch%|
+If InStr(allBundles, needle)
 {
 	StringSplit, bundleArray, allBundles, `,
 	Loop, %bundleArray0%
@@ -463,13 +463,13 @@ If InStr(allBundles, PossibleMatch)
 
 Return
 
-HOTKEYS: 
-StringTrimLeft,hotkey,A_ThisHotkey,1 
-StringLen,hotkeyl,hotkey 
-If hotkeyl>1 
-  hotkey=`{%hotkey%`} 
+HOTKEYS:
+StringTrimLeft,hotkey,A_ThisHotkey,1
+StringLen,hotkeyl,hotkey
+If hotkeyl>1
+  hotkey=`{%hotkey%`}
 Send,{SC77}
-Return 
+Return
 
 ASSIGNVARS:
 Version = 0.6
@@ -491,8 +491,8 @@ return
 READINI:
 IniWrite,%Version%,texter.ini,Preferences,Version
 IniWrite,0,texter.ini,Settings,Disable
-cancel := GetValFromIni("Cancel","Keys","{Escape}") ;keys to stop completion, remember {} 
-ignore := GetValFromIni("Ignore","Keys","{Tab}`,{Enter}`,{Space}") ;keys not to send after completion 
+cancel := GetValFromIni("Cancel","Keys","{Escape}") ;keys to stop completion, remember {}
+ignore := GetValFromIni("Ignore","Keys","{Tab}`,{Enter}`,{Space}") ;keys not to send after completion
 IniWrite,{Escape}`,{Tab}`,{Enter}`,{Space}`,{Left}`,{Right}`,{Up}`,{Down},texter.ini,Autocomplete,Keys
 keys := GetValFromIni("Autocomplete","Keys","{Escape}`,{Tab}`,{Enter}`,{Space}`,{Left}`,{Right}`,{Esc}`,{Up}`,{Down}")
 otfhotkey := GetValFromIni("Hotkey","OntheFly","^+H")
@@ -517,7 +517,7 @@ OnStartup := GetValFromIni(Settings, Startup, 0)
 if otfhotkey <>
 {
 	Hotkey,IfWinNotActive,Texter Preferences
-	Hotkey,%otfhotkey%,NEWKEY	
+	Hotkey,%otfhotkey%,NEWKEY
 	Hotkey,IfWinActive
 }
 if managehotkey <>
@@ -552,7 +552,7 @@ if disablehotkey <>
 ; Functions
 #Include includes\functions\disable.ahk  				; Disable/enable Texter... need to check if this is still in use (not sure it is)
 #Include includes\functions\urls.ahk       				; Links to Texter homepage and usage instructions
-#Include includes\functions\getfilelist.ahk				; Loops the main %A_ScriptDir%\replacements\*.txt dir and gathers the list of replacements 
+#Include includes\functions\getfilelist.ahk				; Loops the main %A_ScriptDir%\replacements\*.txt dir and gathers the list of replacements
 #Include includes\functions\buildactive.ahk			; Loops the enabled bundles and builds the active set of replacements in Active\replacements\ and Active\replacements
 #Include includes\functions\bundles.ahk				; Implementation for working with bundles in the management GUI
 #Include includes\functions\getvalfromini.ahk		; method for writing to ini
@@ -561,7 +561,7 @@ if disablehotkey <>
 #Include includes\functions\delfrombank.ahk		; method for deleting a hotstring to the bank list of replacements
 #Include includes\functions\enabletriggers.ahk		; method for enabling/disabling Texter
 #Include includes\functions\resources.ahk			; Installs file resources like images and sounds
-#Include includes\functions\printablelist.ahk			; Builds Texter Replacement Guide HTML file 
+#Include includes\functions\printablelist.ahk			; Builds Texter Replacement Guide HTML file
 #Include includes\functions\updatecheck.ahk		; If enabled, checks for updates to Texter on startup
 ; #Include includes\functions\hexall.ahk					; Converts pre-0.5 version of Texter to the new hexified replacement format... may remove in future versions
 #Include includes\functions\hexify.ahk					; Translates back and forth between hex values for replacements
@@ -573,5 +573,5 @@ if disablehotkey <>
 ;#Include includes\functions\autocorrect.ahk			; Spelling autocorrect--may implement in 0.6
 ; #Include includes\functions\autoclose.ahk			; Automatically closes bracketed puntuation, like parentheticals - not currently implemented
 
-EXIT: 
-ExitApp 
+EXIT:
+ExitApp

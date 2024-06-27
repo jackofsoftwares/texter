@@ -1,10 +1,10 @@
 BuildActive:
-allBundles = 
+allBundles = |
 activeBundles =
 Loop,bundles\*,2
 {
 	IniRead,activeCheck,texter.ini,Bundles,%A_LoopFileName%
-	allBundles = %allBundles%%A_LoopFileName%,
+	allBundles = %allBundles%%A_LoopFileName%|
 	if activeCheck = 1
 		activeBundles = %activeBundles%%A_LoopFileName%,
 }
