@@ -448,7 +448,7 @@ IniWrite,%chars_saved%,texter.ini,Stats,Characters
 needle = |%PossibleMatch%|
 If InStr(allBundles, needle)
 {
-	StringSplit, bundleArray, allBundles, `,
+	StringSplit, bundleArray, allBundles, `|
 	Loop, %bundleArray0%
 	{
 		curBun := bundleArray%A_Index%
